@@ -14,12 +14,10 @@
 <body>
     <div id='app'>
         <h1>Welcome to javascript learning</h1>
-        <label>Search for programming language</label>
-        <input type='text' name='name' v-model="findLanguage">
-        <ul>
-            <li v-for="lang in filterLanguages ">{{ lang}}</li>
+        <label>UserName :</label>
+        <input type='text' name='username' v-model="username">
+        <p style="color:red;" v-html='validateUsername'></p>
 
-        </ul>
     </div>
     <script src="js/vue.js">
     </script>
@@ -27,13 +25,8 @@
         var vm = new Vue({
             el: ' #app ',
             data: {
-
-                name: 'adam ',
-                age: 28,
-                message: "i love apple",
-                findLanguage: '',
-                languages: ['HTML', 'CSS', 'Sass', 'JavaScript', 'PHP', 'MySQL', 'Python'],
-
+                green: false,
+                username: ' ',
             },
             methods: {
                 // fullData: function() {
@@ -43,22 +36,16 @@
 
             },
             computed: {
-                filterLanguages: function() {
-                    var filtering = new RegExp(this.findLanguage, 'i');
-                    return this.languages.filter(function(el) {
-                        return el.match(filtering);
-
-                    });
-                    //replace ces deux lignes  return this.languages.filter(function(el) {
-                    // return el.match(filtering);
-                    // return this.languages.filter(e => el.match(filtering));
-                }
-
-
+                validateUsername: function() {
+                    if (!this.username) {
+                        return 'Username should not be empty ';
+                    } else if (this.username.length < 8) {
+                        return ' username is too short ';
+                    } else {
+                        return '<p style="color: green "> Username is valid </p> ';
+                    }
+                },
             },
-
-
-
         })
     </script>
 
