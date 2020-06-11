@@ -14,9 +14,11 @@
 <body>
     <div id='app'>
         <h1>Welcome to javascript learning</h1>
-        <label>UserName :</label>
-        <input type='text' name='username' v-model.lazy="username">
-        <p style="color:red;" v-html='validateUsername'></p>
+        <hr> <label>TND :</label>
+        <input type='text' name='tnd' v-model="tnd">
+        <label>USD :</label>
+        <input type='text' name='usd' v-model="usd">
+        <p></p>
 
     </div>
     <script src="js/vue.js">
@@ -25,29 +27,27 @@
         var vm = new Vue({
             el: ' #app ',
             data: {
-                green: false,
-                username: ' ',
+                tnd: 0,
+                usd: 0,
             },
             methods: {
-                // fullData: function() {
-                //     console.log('run ');
-                //     return this.name + ' ' + this.age;
-                // }
+
 
             },
             computed: {
-                validateUsername: function() {
-                    if (!this.username) {
-                        return 'Username should not be empty ';
-                    } else if (this.username.length < 8) {
-                        return ' username is too short ';
-                    } else if (!isNaN(this.username)) {
-                        return ' username sould not be a number only ';
-                    } else {
-                        return '<p style="color: #4cd137 ">  the username you typed is valid </p> ';
-                    }
-                },
+
             },
+            watch: {
+                tnd: function(v) {
+                    this.usd = Math.round((v / 2.800) * 100) / 100;
+                    console.log('TND Run');
+                },
+                usd: function(a) {
+                    this.tnd = Math.round((a * 2.800) * 1000) / 1000;
+                    console.log('USD Run');
+                }
+            }
+
         })
     </script>
 
